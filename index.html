@@ -1,1 +1,223 @@
-Hello
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Matching Game</title>
+    <style>
+    body {
+        background-color: lightgrey;
+    }
+
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        height: 300px;
+        width: 300px;
+        background: green;
+    }
+
+    span {
+        background: red;
+        height: 90px;
+        width: 90px;
+        margin: 5px;
+        color: white;
+        text-align: center;
+        line-height: 90px;
+        font-size: 24px;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>Score: <b id="result">0</b></h3>
+    <div class="grid">
+    </div>
+    <script>
+    let cardsChosen = []
+    let cardsChosenId = []
+    const resultsDisplay = document.querySelector('#result');
+    let wins = 0;
+    const cardArray = ["", "", "", "", "", "", "", "", ""]
+
+    console.log(cardArray);
+
+    const grid = document.querySelector(".grid");
+
+    function createBoard() {
+        for (let i = 0; i < cardArray.length; i++) {
+            let card = document.createElement('span');
+            card.setAttribute('data-id', i);
+            card.addEventListener('click', flipCard)
+            grid.appendChild(card)
+        }
+    }
+    createBoard()
+
+    function DetectWin() {
+        if (cardArray[0] == "X" && cardArray[1] == "X" && cardArray[2] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+        } else if (cardArray[3] == "X" && cardArray[4] == "X" && cardArray[5] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+        } else if (cardArray[6] == "X" && cardArray[7] == "X" && cardArray[8] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+
+        } else if (cardArray[0] == "X" && cardArray[3] == "X" && cardArray[6] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+
+        } else if (cardArray[1] == "X" && cardArray[4] == "X" && cardArray[7] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+
+        } else if (cardArray[2] == "X" && cardArray[5] == "X" && cardArray[8] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+
+        } else if (cardArray[0] == "X" && cardArray[4] == "X" && cardArray[8] == "X") {
+            window.alert("You Won");
+            win = "true";
+
+
+        } else if (cardArray[6] == "X" && cardArray[4] == "X" && cardArray[2] == "X") {
+            window.alert("You Won");
+            win = "true";
+        }
+
+    }
+
+    function DetectLose() {
+        if (cardArray[0] == "O" && cardArray[1] == "O" && cardArray[2] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[3] == "O" && cardArray[4] == "O" && cardArray[5] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[6] == "O" && cardArray[7] == "O" && cardArray[8] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[0] == "O" && cardArray[3] == "O" && cardArray[6] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[1] == "O" && cardArray[4] == "O" && cardArray[7] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[2] == "O" && cardArray[5] == "O" && cardArray[8] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[0] == "O" && cardArray[4] == "O" && cardArray[8] == "O") {
+            window.alert("You Lost");
+        } else if (cardArray[6] == "O" && cardArray[4] == "O" && cardArray[2] == "O") {
+            window.alert("You Lost");
+        }
+    }
+
+    function AiMove() {
+        var cards = document.querySelectorAll('span');
+        RandomNumber = Math.floor(Math.random() * 9);
+        //From Left and Top
+        if (cardArray[0] == "O" && cardArray[1] == "O" && cardArray[2] == "") {
+            cardArray[2] = "O";
+        } else if (cardArray[3] == "O" && cardArray[4] == "O" && cardArray[5] == "") {
+            cardArray[5] = "O";
+        } else if (cardArray[6] == "O" && cardArray[7] == "O" && cardArray[8] == "") {
+            cardArray[8] = "O";
+        } else if (cardArray[0] == "O" && cardArray[3] == "O" && cardArray[6] == "") {
+            cardArray[6] = "O";
+
+        } else if (cardArray[1] == "O" && cardArray[4] == "O" && cardArray[7] == "") {
+            cardArray[7] = "O";
+        } else if (cardArray[2] == "O" && cardArray[5] == "O" && cardArray[8] == "") {
+            cardArray[8] = "O";
+        } else if (cardArray[0] == "O" && cardArray[4] == "O" && cardArray[8] == "") {
+            cardArray[8] = "O";
+        } else if (cardArray[6] == "O" && cardArray[4] == "O" && cardArray[2] == "") {
+            cardArray[2] = "O";
+        } //From Right and Bottom
+        else if (cardArray[0] == "" && cardArray[1] == "O" && cardArray[2] == "O") {
+            cardArray[3] = "O";
+        } else if (cardArray[3] == "" && cardArray[4] == "O" && cardArray[5] == "O") {
+            cardArray[3] = "O";
+        } else if (cardArray[6] == "" && cardArray[7] == "O" && cardArray[8] == "O") {
+            cardArray[6] = "O";
+        } else if (cardArray[0] == "" && cardArray[3] == "O" && cardArray[6] == "O") {
+            cardArray[0] = "O";
+        } else if (cardArray[1] == "" && cardArray[4] == "O" && cardArray[7] == "O") {
+            cardArray[1] = "O";
+        } else if (cardArray[2] == "" && cardArray[5] == "O" && cardArray[8] == "O") {
+            cardArray[2] = "O";
+        } else if (cardArray[0] == "" && cardArray[4] == "O" && cardArray[8] == "O") {
+            cardArray[0] = "O";
+        } else if (cardArray[6] == "" && cardArray[4] == "O" && cardArray[2] == "O") {
+            cardArray[6] = "O";
+         //From Right and Bottom
+        } else if (cardArray[0] == "O" && cardArray[1] == "" && cardArray[2] == "O") {
+            cardArray[1] = "O";
+        } else if (cardArray[3] == "O" && cardArray[4] == "" && cardArray[5] == "O") {
+            cardArray[4] = "O";
+        } else if (cardArray[6] == "O" && cardArray[7] == "" && cardArray[8] == "O") {
+            cardArray[7] = "O";
+        } else if (cardArray[0] == "O" && cardArray[3] == "" && cardArray[6] == "O") {
+            cardArray[3] = "O";
+        } else if (cardArray[1] == "O" && cardArray[4] == "" && cardArray[7] == "O") {
+            cardArray[4] = "O";
+        } else if (cardArray[2] == "O" && cardArray[5] == "" && cardArray[8] == "O") {
+            cardArray[5] = "O";
+        } else if (cardArray[0] == "O" && cardArray[4] == "" && cardArray[8] == "O") {
+            cardArray[4] = "O";
+        } else if (cardArray[6] == "O" && cardArray[4] == "" && cardArray[2] == "O") {
+            cardArray[4] = "O";
+        } else if (cardArray[RandomNumber] == "") {
+            cardArray[RandomNumber] = "O";
+            cards[RandomNumber] = "O";
+            cards[RandomNumber].textContent = "O";
+        } else {
+            AiMove()
+        }
+    }
+
+    function checkForMatch() {
+        var cards = document.querySelectorAll('span');
+        const optionOneId = cardsChosenId[0];
+        console.log(optionOneId)
+        if (cardArray[optionOneId] == "") {
+            cardArray[optionOneId] = "X";
+            cards[optionOneId] = "X";
+            cards[optionOneId].textContent = "X";
+            this.textContent = cardArray[optionOneId];
+
+
+
+        } else {
+            console.log('match');
+            console.log(wins);
+        }
+        cardsChosen = [];
+        cardsChosenId = [];
+        win = "";
+        DetectWin()
+        console.log(DetectWin)
+        if (win != "true") {
+            AiMove()
+        }
+            
+        DetectLose()
+    }
+
+    function flipCard() {
+        const cardId = this.getAttribute('data-id');
+        cardsChosen.push(cardArray[cardId]);
+        cardsChosenId.push(cardId);
+        this.textContent = cardArray[cardId];
+        if (cardsChosen.length === 1) {
+            setTimeout(checkForMatch, 1);
+        }
+        console.log(cardsChosen, cardsChosenId);
+    }
+    </script>
+</body>
+
+</html>
